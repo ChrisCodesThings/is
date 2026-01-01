@@ -1,0 +1,6 @@
+
+/**
+ * @typedef {*} myType
+ */
+
+export { };
