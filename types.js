@@ -1,6 +1,0 @@
-
-/**
- * @typedef {*} myType
- */
-
-export { };
