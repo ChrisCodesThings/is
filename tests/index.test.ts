@@ -1,57 +1,73 @@
 import { describe, it, expect } from 'vitest';
-import { isStr, isArr, isNum } from '../src/is.js';
+import * as is from '../src/is.js';
 
 describe('is', () => {
-    describe('isStr', () => {
+    describe('str', () => {
         it('should return true for strings', () => {
-            expect(isStr('hello')).toBe(true);
-            expect(isStr('')).toBe(true);
-            expect(isStr(String('hello'))).toBe(true);
-            expect(isStr(new String('hello'))).toBe(true);
+            expect(is.str('hello')).toBe(true);
+            expect(is.str('')).toBe(true);
+            expect(is.str(String('hello'))).toBe(true);
+            expect(is.str(new String('hello'))).toBe(true);
         });
 
         it('should return false for non-strings', () => {
-            expect(isStr(123)).toBe(false);
-            expect(isStr(null)).toBe(false);
-            expect(isStr({})).toBe(false);
+            expect(is.str(123)).toBe(false);
+            expect(is.str(null)).toBe(false);
+            expect(is.str({})).toBe(false);
         });
     });
 
-    describe('isArr', () => {
+    describe('arr', () => {
         it('should return true for arrays', () => {
-            expect(isArr([])).toBe(true);
-            expect(isArr([1, 2, 3])).toBe(true);
-            expect(isArr(new Array(3))).toBe(true);
+            expect(is.arr([])).toBe(true);
+            expect(is.arr([1, 2, 3])).toBe(true);
+            expect(is.arr(new Array(3))).toBe(true);
         });
 
         it('should return false for non-arrays', () => {
-            expect(isArr({})).toBe(false);
-            expect(isArr('[]')).toBe(false);
-            expect(isArr(null)).toBe(false);
+            expect(is.arr({})).toBe(false);
+            expect(is.arr('[]')).toBe(false);
+            expect(is.arr(null)).toBe(false);
         });
     });
 
-    describe('isNum', () => {
+    describe('num', () => {
         it('should return true for valid numbers', () => {
-            expect(isNum(0)).toBe(true);
-            expect(isNum(123)).toBe(true);
-            expect(isNum(-123)).toBe(true);
-            expect(isNum(123.456)).toBe(true);
+            expect(is.num(0)).toBe(true);
+            expect(is.num(123)).toBe(true);
+            expect(is.num(-123)).toBe(true);
+            expect(is.num(123.456)).toBe(true);
         });
 
         it('should return false for non-numbers', () => {
-            expect(isNum('123')).toBe(false); // Number as string
-            expect(isNum(true)).toBe(false);
-            expect(isNum([])).toBe(false);
-            expect(isNum(NaN)).toBe(false);
+            expect(is.num('123')).toBe(false); // Number as string
+            expect(is.num(true)).toBe(false);
+            expect(is.num([])).toBe(false);
+            expect(is.num(NaN)).toBe(false);
         });
 
         it('should return false for edge cases', () => {
-            expect(isNum('')).toBe(false);    // Blank string edge case
-            expect(isNum([1])).toBe(false);   // Single index array edge case
-            expect(isNum(Infinity)).toBe(false);  // Infinity isn't really a usable number
-            expect(isNum(-Infinity)).toBe(false); // Infinity isn't really a usable number
-            expect(isNum(Symbol('sym'))).toBe(false); // Symbols throw in Number()
+            expect(is.num('')).toBe(false);    // Blank string edge case
+            expect(is.num([1])).toBe(false);   // Single index array edge case
+            expect(is.num(Infinity)).toBe(false);  // Infinity isn't really a usable number
+            expect(is.num(-Infinity)).toBe(false); // Infinity isn't really a usable number
+            expect(is.num(Symbol('sym'))).toBe(false); // Symbols throw in Number()
+        });
+    });
+
+    describe('int', () => {
+        it('should return true for whole numbers', () => {
+            expect(is.int(0)).toBe(true);
+            expect(is.int(123)).toBe(true);
+            expect(is.int(-123)).toBe(true);
+        });
+
+        it('should return false for non-integers', () => {
+            expect(is.int(123.456)).toBe(false);
+        });
+
+        it('should return false for edge cases', () => {
+            expect(is.int(Symbol('sym'))).toBe(false); // Symbols throw in Number()
         });
     });
 });

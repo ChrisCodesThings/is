@@ -3,7 +3,7 @@
  * @param x The value to check.
  * @return True if the value is a string.
  */
-export const isStr = (x: any): x is string => {
+export const str = (x: any): x is string => {
     return typeof x === 'string' || x instanceof String;
 };
 
@@ -12,7 +12,7 @@ export const isStr = (x: any): x is string => {
  * @param x The value to check.
  * @return True if the value is an array.
  */
-export const isArr = (x: any): x is any[] => {
+export const arr = (x: any): x is any[] => {
     return Array.isArray(x);
 };
 
@@ -21,11 +21,11 @@ export const isArr = (x: any): x is any[] => {
  * @param x The value to check.
  * @return True if the value is a number.
  */
-export const isNum = (x: any): x is number => {
+export const num = (x: any): x is number => {
     // Try because certain things (e.g. symbols) will throw an error when used in Number()
     try {
         // "" will return 0, [5] will return 5, so exclude strings and arrays
-        if (isStr(x) || isArr(x)) {
+        if (str(x) || arr(x)) {
             return false;
         }
 
@@ -37,4 +37,17 @@ export const isNum = (x: any): x is number => {
     } catch {
         return false;
     }
+};
+
+/**
+ * Checks if a value is a whole number (integer).
+ * @param x The value to check.
+ * @return True if the value is a whole number.
+ */
+export const int = (x: any): x is number => {
+    if (num(x) && Number.isInteger(x)) {
+        return true;
+    }
+
+    return false;
 };
