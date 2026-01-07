@@ -1,92 +1,119 @@
-# stub-repo <br> [![Test workflow status](https://github.com/ChrisCodesThings/stub-repo/actions/workflows/test.yml/badge.svg)](../../actions/workflows/test.yml) [![NPM Version](https://img.shields.io/npm/v/@chriscodesthings/stub-repo)](https://www.npmjs.com/package/@chriscodesthings/stub-repo) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+# is <br> [![Test workflow status](https://github.com/ChrisCodesThings/is/actions/workflows/test.yml/badge.svg)](../../actions/workflows/test.yml) [![NPM Version](https://img.shields.io/npm/v/@chriscodesthings/is)](https://www.npmjs.com/package/@chriscodesthings/is) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-> **npm package template**
+> **Type checking utilities**
 
 ## Description
 
-Does what it says on the tin.
+A collection of lightweight type checking and validation functions.
 
 ### See...
-- [Install/Usage](#install "Install and Usage")
-- [Types](#types "Types")
-- [Syntax](#syntax "Syntax")
-- [Examples](#examples "Examples")
-- [See Also](#see-also "See Also")
+- [Install / Usage](#install--usage "Install and Usage")
+- [Reference](#reference "List of functions")
+- [Functions](#functions "Detailed documentation")
+- [See Also](#see-also "Related projects")
 
 ---
 
-## Install
+## Install / Usage
 
 ```sh
-npm install --save @chriscodesthings/stub-repo
+npm install --save @chriscodesthings/is
 ```
 
 ## Usage
 
+### Namespace
 ```js
-import stubRepo from '@chriscodesthings/stub-repo';
+import * as is from '@chriscodesthings/is';
 
-console.log(stubRepo("hello world!"));
-// => true
+if (is.isStr("hello world!")) {
+    console.log("This is a string.");
+}
 ```
 
-## Types
-
-This package uses types from:
-- [**basic-color-types**: Defines named types for common color formats](https://github.com/ChrisCodesThings/basic-color-types "Defines named types for common color formats")
-
-These types are made available:
-
-```ts
-export type myType = any;
-```
-
-### TypeScript
-
-To use the types in your TypeScript project:
-
+### Named Imports
 ```js
-import type { myType } from '@chriscodesthings/stub-repo';
+import { isNum, isStr, ... } from '@chriscodesthings/is';
 
-const myColor: myType = "foo";
+if (isStr("hello world!")) {
+    console.log("This is a string.");
+}
 ```
 
-### JavaScript
+---
 
-You can also use types in JavaScript with JSDoc with `@typedef` imports:
+## Reference
 
-```js
-/**
- * @typedef {import('@chriscodesthings/stub-repo').myType} myType
- */
+| Function | Description |
+| :--- | :--- |
+| [`is.isStr(x)`](#isisstr) | Checks if a value is a string. |
+| [`is.isNum(x)`](#isisnum) | Checks if a value is a finite number. |
+| [`is.isArr(x)`](#isisarr) | Checks if a value is an array. |
+| [`is.isInt(x)`](#isisint) | Checks if a value is an integer. |
+| [`is.isHexColor(x)`](#isishexcolor) | Checks if a value is a valid Hex color. |
 
-/** @type {myType} */
-const myColor = [100, 149, 237, 1];
-```
+## Functions
 
-## Syntax
+### `is.isStr`
+Checks if a variable is a string or a String object.
 
 ```js
-stubRepo(var);
+is.isStr('hello'); // true
+is.isStr(123);     // false
 ```
+[Back to Reference](#reference)
 
-### Parameters
+---
 
-- *var*: any
-
-### Return Value
-
-Returns something probably.
-
-## Examples
+### `is.isNum`
+Checks if a variable is a finite number.
 
 ```js
-// This is how you could use this in your code. 
+is.isNum(42);  // true
+is.isNum(NaN); // false
 ```
+[Back to Reference](#reference)
+
+---
+
+### `is.isArr`
+Determines if a variable is an Array.
+
+```js
+is.isArr([1, 2, 3]); // true
+is.isArr({});        // false
+```
+[Back to Reference](#reference)
+
+---
+
+### `is.isInt`
+Checks if a variable is a mathematical integer.
+
+```js
+is.isInt(42);  // true
+is.isInt(42.5); // false
+```
+[Back to Reference](#reference)
+
+---
+
+### `is.isHexColor`
+Validates if a string is a valid CSS Hexadecimal color.
+
+```js
+is.isHexColor('#fff');       // true
+is.isHexColor('#ff0000ff');  // true
+is.isHexColor('blue');       // false
+```
+[Back to Reference](#reference)
+
+---
 
 ## See Also...
 
-- [**stub-repo**: npm package template](https://github.com/ChrisCodesThings/stub-repo "npm package template")
-- [**stub-repo**: npm package template](https://github.com/ChrisCodesThings/stub-repo "npm package template")
-- [**stub-repo**: npm package template](https://github.com/ChrisCodesThings/stub-repo "npm package template")
-- [**stub-repo**: npm package template](https://github.com/ChrisCodesThings/stub-repo "npm package template")
+- [**color-utils**: A collection of lightweight utilities for color identification, conversion, and simple manipulation](https://github.com/ChrisCodesThings/color-utils "A collection of lightweight utilities for color identification, conversion, and simple manipulation")
+
+## License
+
+MIT © ChrisCodesThings

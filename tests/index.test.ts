@@ -1,73 +1,96 @@
 import { describe, it, expect } from 'vitest';
-import * as is from '../src/is.js';
+import * as is from '../src/index.js';
 
 describe('is', () => {
     describe('str', () => {
         it('should return true for strings', () => {
-            expect(is.str('hello')).toBe(true);
-            expect(is.str('')).toBe(true);
-            expect(is.str(String('hello'))).toBe(true);
-            expect(is.str(new String('hello'))).toBe(true);
+            expect(is.isStr('hello')).toBe(true);
+            expect(is.isStr('')).toBe(true);
+            expect(is.isStr(String('hello'))).toBe(true);
+            expect(is.isStr(new String('hello'))).toBe(true);
         });
 
         it('should return false for non-strings', () => {
-            expect(is.str(123)).toBe(false);
-            expect(is.str(null)).toBe(false);
-            expect(is.str({})).toBe(false);
+            expect(is.isStr(123)).toBe(false);
+            expect(is.isStr(null)).toBe(false);
+            expect(is.isStr({})).toBe(false);
         });
     });
 
     describe('arr', () => {
         it('should return true for arrays', () => {
-            expect(is.arr([])).toBe(true);
-            expect(is.arr([1, 2, 3])).toBe(true);
-            expect(is.arr(new Array(3))).toBe(true);
+            expect(is.isArr([])).toBe(true);
+            expect(is.isArr([1, 2, 3])).toBe(true);
+            expect(is.isArr(new Array(3))).toBe(true);
         });
 
         it('should return false for non-arrays', () => {
-            expect(is.arr({})).toBe(false);
-            expect(is.arr('[]')).toBe(false);
-            expect(is.arr(null)).toBe(false);
+            expect(is.isArr({})).toBe(false);
+            expect(is.isArr('[]')).toBe(false);
+            expect(is.isArr(null)).toBe(false);
         });
     });
 
     describe('num', () => {
         it('should return true for valid numbers', () => {
-            expect(is.num(0)).toBe(true);
-            expect(is.num(123)).toBe(true);
-            expect(is.num(-123)).toBe(true);
-            expect(is.num(123.456)).toBe(true);
+            expect(is.isNum(0)).toBe(true);
+            expect(is.isNum(123)).toBe(true);
+            expect(is.isNum(-123)).toBe(true);
+            expect(is.isNum(123.456)).toBe(true);
         });
 
         it('should return false for non-numbers', () => {
-            expect(is.num('123')).toBe(false); // Number as string
-            expect(is.num(true)).toBe(false);
-            expect(is.num([])).toBe(false);
-            expect(is.num(NaN)).toBe(false);
+            expect(is.isNum('123')).toBe(false); // Number as string
+            expect(is.isNum(true)).toBe(false);
+            expect(is.isNum([])).toBe(false);
+            expect(is.isNum(NaN)).toBe(false);
         });
 
         it('should return false for edge cases', () => {
-            expect(is.num('')).toBe(false);    // Blank string edge case
-            expect(is.num([1])).toBe(false);   // Single index array edge case
-            expect(is.num(Infinity)).toBe(false);  // Infinity isn't really a usable number
-            expect(is.num(-Infinity)).toBe(false); // Infinity isn't really a usable number
-            expect(is.num(Symbol('sym'))).toBe(false); // Symbols throw in Number()
+            expect(is.isNum('')).toBe(false);    // Blank string edge case
+            expect(is.isNum([1])).toBe(false);   // Single index array edge case
+            expect(is.isNum(Infinity)).toBe(false);  // Infinity isn't really a usable number
+            expect(is.isNum(-Infinity)).toBe(false); // Infinity isn't really a usable number
+            expect(is.isNum(Symbol('sym'))).toBe(false); // Symbols throw in Number()
         });
     });
 
     describe('int', () => {
         it('should return true for whole numbers', () => {
-            expect(is.int(0)).toBe(true);
-            expect(is.int(123)).toBe(true);
-            expect(is.int(-123)).toBe(true);
+            expect(is.isInt(0)).toBe(true);
+            expect(is.isInt(123)).toBe(true);
+            expect(is.isInt(-123)).toBe(true);
         });
 
         it('should return false for non-integers', () => {
-            expect(is.int(123.456)).toBe(false);
+            expect(is.isInt(123.456)).toBe(false);
         });
 
         it('should return false for edge cases', () => {
-            expect(is.int(Symbol('sym'))).toBe(false); // Symbols throw in Number()
+            expect(is.isInt(Symbol('sym'))).toBe(false); // Symbols throw in Number()
+        });
+    });
+
+    describe('hexColor', () => {
+        it('should return true for valid hex colors', () => {
+            expect(is.isHexColor('#fff')).toBe(true);
+            expect(is.isHexColor('fff')).toBe(true);
+            expect(is.isHexColor('#000000')).toBe(true);
+            expect(is.isHexColor('000000')).toBe(true);
+        });
+
+        it('should handle alpha channels (4 and 8 digits)', () => {
+            expect(is.isHexColor('#f0f0')).toBe(true);
+            expect(is.isHexColor('f0f0')).toBe(true);
+            expect(is.isHexColor('#ff0000ff')).toBe(true);
+            expect(is.isHexColor('ff0000ff')).toBe(true);
+        });
+
+        it('should return false for invalid strings', () => {
+            expect(is.isHexColor('#ggg')).toBe(false); // Invalid chars
+            expect(is.isHexColor('xyz')).toBe(false); // Invalid chars
+            expect(is.isHexColor('12345')).toBe(false); // Invalid length
+            expect(is.isHexColor('#ff')).toBe(false); // Invalid length
         });
     });
 });

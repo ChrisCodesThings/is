@@ -1,1 +1,3 @@
-export * from './is.js';
+export * from './basic.js';
+export * from './string.js';
+
