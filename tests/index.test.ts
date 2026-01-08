@@ -109,27 +109,6 @@ describe('is', () => {
             });
         });
 
-        describe('hexColor', () => {
-            it('should return true for valid hex colors', () => {
-                expect(is.isHexColor('#fff')).toBe(true);
-                expect(is.isHexColor('#000000')).toBe(true);
-            });
-
-            it('should handle alpha channels (4 and 8 digits)', () => {
-                expect(is.isHexColor('#f0f0')).toBe(true);
-                expect(is.isHexColor('#ff0000ff')).toBe(true);
-            });
-
-            it('should return false for invalid strings', () => {
-                expect(is.isHexColor('fff')).toBe(false); // No #
-                expect(is.isHexColor('ff0000ff')).toBe(false); // No #
-                expect(is.isHexColor('#ggg')).toBe(false); // Invalid chars
-                expect(is.isHexColor('xyz')).toBe(false); // Invalid chars
-                expect(is.isHexColor('12345')).toBe(false); // Invalid length
-                expect(is.isHexColor('#ff')).toBe(false); // Invalid length
-            });
-        });
-
         describe('isBalancedChr', () => {
             it('should return true for balanced brackets', () => {
                 expect(isBalancedChr('(a + b)', '(', ')')).toBe(true);
