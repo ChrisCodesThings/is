@@ -1,11 +1,9 @@
 # Test package when we hit a milestone
 
-name: Test on new tag
+name: Test
 
 on:
   push:
-    tags:
-      - 'v*'
 
 jobs:
   test:
