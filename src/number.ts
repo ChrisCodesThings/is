@@ -1,26 +1,10 @@
 /**
- * Basic type checking functions.
- * Includes checks for strings, arrays, numbers, and integers.
+ * Number validation functions.
+ * Includes checks for specific number formats like percentages.
  */
 
+import { isArr, isStr } from './index.js';
 
-/**
- * Checks if a value is a string or a String object.
- * @param x The value to check.
- * @return True if the value is a string.
- */
-export const isStr = (x: any): x is string => {
-    return typeof x === 'string' || x instanceof String;
-};
-
-/**
- * Checks if a value is an array.
- * @param x The value to check.
- * @return True if the value is an array.
- */
-export const isArr = (x: any): x is any[] => {
-    return Array.isArray(x);
-};
 
 /**
  * Checks if a value is a valid, usable number.
@@ -45,6 +29,7 @@ export const isNum = (x: any): x is number => {
     }
 };
 
+
 /**
  * Checks if a value is a whole number (integer).
  * @param x The value to check.
@@ -57,3 +42,17 @@ export const isInt = (x: any): x is number => {
 
     return false;
 };
+
+
+/**
+ * Checks if a value is a percentage string (e.g. "50%", "12.5%").
+ * @param x The value to check.
+ * @returns True if the value is a valid percentage string.
+ */
+export const isPct = (x: string): boolean => {
+    if (!isStr(x)) return false;
+    if (!x.endsWith('%')) return false;
+    if (isNaN(Number(x.slice(0, -1)))) return false;
+
+    return true;
+}

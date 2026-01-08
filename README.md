@@ -40,32 +40,61 @@ if (isStr("hello world!")) {
 }
 ```
 
+### Vanilla (Browser)
+You can use the library directly in the browser. Since the package is published as an ES module, use `type="module"` in your script tag.
+
+#### jsDelivr
+```html
+<script type="module">
+    import { isNum } from 'https://cdn.jsdelivr.net/npm/@chriscodesthings/is@0.1.0/dist/index.js';
+
+    if (isNum(42)) {
+        console.log("Verified via jsDelivr");
+    }
+</script>
+```
+
+#### unpkg
+```html
+<script type="module">
+    import * as is from 'https://unpkg.com/@chriscodesthings/is@0.1.0/dist/index.js';
+
+    if (is.isStr("hello")) {
+        console.log("Verified via unpkg");
+    }
+</script>
+```
+
 ---
 
 ## Reference
 
+### Numbers
+
+| Function | Description |
+| :--- | :--- |
+| [`is.isNum(x)`](#isisnum) | Checks if a value is a finite number. |
+| [`is.isInt(x)`](#isisint) | Checks if a value is an integer. |
+| [`is.isPct(x)`](#isispct) | Checks if a string is a percentage. |
+
+### Strings
+
 | Function | Description |
 | :--- | :--- |
 | [`is.isStr(x)`](#isisstr) | Checks if a value is a string. |
-| [`is.isNum(x)`](#isisnum) | Checks if a value is a finite number. |
+| [`is.isBalancedChr(str,c1,c2)`](#isisbalancedchr) | Checks if a value is an integer. |
+
+### Arrays
+
+| Function | Description |
+| :--- | :--- |
 | [`is.isArr(x)`](#isisarr) | Checks if a value is an array. |
-| [`is.isInt(x)`](#isisint) | Checks if a value is an integer. |
-| [`is.isHexColor(x)`](#isishexcolor) | Checks if a value is a valid Hex color. |
 
 ## Functions
 
-### `is.isStr`
-Checks if a variable is a string or a String object.
+### Number Functions
 
-```js
-is.isStr('hello'); // true
-is.isStr(123);     // false
-```
-[Back to Reference](#reference)
-
----
-
-### `is.isNum`
+#### `is.isNum`
 Checks if a variable is a finite number.
 
 ```js
@@ -76,7 +105,63 @@ is.isNum(NaN); // false
 
 ---
 
-### `is.isArr`
+#### `is.isInt`
+Checks if a variable is a mathematical integer.
+
+```js
+is.isInt(42);  // true
+is.isInt(42.5); // false
+```
+
+[Back to Reference](#reference)
+
+---
+
+#### `is.isPct`
+Checks if a string is a percentage.
+
+```js
+is.isPct("25%");  // true
+is.isPct("15"); // false
+is.isPct(7); // false
+```
+
+[Back to Reference](#reference)
+
+---
+
+### String Functions
+
+#### `is.isStr`
+Checks if a variable is a string or a String object.
+
+```js
+is.isStr('hello'); // true
+is.isStr(123);     // false
+```
+[Back to Reference](#reference)
+
+---
+
+#### `is.isBalancedChr`
+
+Checks if a string has balanced characters (e.g., brackets). This function uses a depth counter to ensure every opening character has a corresponding closing character in the correct order.
+
+```js
+isBalancedChr("(a + b)", "(", ")");        // true
+isBalancedChr("((a) + b)", "(", ")");      // true
+isBalancedChr("a) + b(", "(", ")");        // false (count goes negative)
+isBalancedChr("((a + b)", "(", ")");       // false (unclosed bracket)
+isBalancedChr("<div></div>", "<", ">");    // true
+```
+
+**Note:** `chr1` and `chr2` must be single characters. For validating balanced multi-character sequences, use `isBalancedStr`.
+
+---
+
+### Array Functions 
+
+#### `is.isArr`
 Determines if a variable is an Array.
 
 ```js
@@ -87,31 +172,9 @@ is.isArr({});        // false
 
 ---
 
-### `is.isInt`
-Checks if a variable is a mathematical integer.
-
-```js
-is.isInt(42);  // true
-is.isInt(42.5); // false
-```
-[Back to Reference](#reference)
-
----
-
-### `is.isHexColor`
-Validates if a string is a valid CSS Hexadecimal color.
-
-```js
-is.isHexColor('#fff');       // true
-is.isHexColor('#ff0000ff');  // true
-is.isHexColor('blue');       // false
-```
-[Back to Reference](#reference)
-
----
-
 ## See Also...
 
+- [**parse-number**: A numeric sanitizer that fixes Number() edge cases, and allows for percentage](https://github.com/ChrisCodesThings/color-utils "A numeric sanitizer that fixes Number() edge cases, and allows for percentage")
 - [**color-utils**: A collection of lightweight utilities for color identification, conversion, and simple manipulation](https://github.com/ChrisCodesThings/color-utils "A collection of lightweight utilities for color identification, conversion, and simple manipulation")
 
 ## License

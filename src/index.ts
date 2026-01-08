@@ -1,3 +1,4 @@
-export * from './basic.js';
+export * from './everythingElse.js';
+export * from './number.js';
 export * from './string.js';
 
