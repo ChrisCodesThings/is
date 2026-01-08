@@ -1,6 +1,6 @@
 {
     "name": "@chriscodesthings/is",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "Type checking utilities",
     "keywords": [
         "is",
