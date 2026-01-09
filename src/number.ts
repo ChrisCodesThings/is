@@ -31,7 +31,7 @@ export const isNum = (x: any): x is number => {
 
 
 /**
- * Checks if a value is a whole number (integer).
+ * Checks if a value is valid, usable integer (whole number).
  * @param x The value to check.
  * @return True if the value is a whole number.
  */

@@ -5,7 +5,13 @@
     "keywords": [
         "is",
         "type",
-        "check"
+        "check",
+        "number",
+        "integer",
+        "percentage",
+        "string",
+        "balanced",
+        "array"
     ],
     "repository": {
         "type": "git",
