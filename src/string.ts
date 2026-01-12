@@ -16,7 +16,7 @@ export const isStr = (x: any): x is string => {
 
 /**
  * Checks if a string has balanced characters (e.g. brackets).
- * `chr1` and `chr2` must be single characters. For strings, use isBalandedStr.
+ * `chr1` and `chr2` must be single characters.
  * @param str The string to check.
  * @param chr1 The opening character (e.g. '(').
  * @param chr2 The closing character (e.g. ')').

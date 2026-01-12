@@ -14,7 +14,7 @@ A collection of lightweight type checking and validation functions.
 
 ---
 
-## Install / Usage
+## Install from NPM
 
 ```sh
 npm install --save @chriscodesthings/is
@@ -22,47 +22,24 @@ npm install --save @chriscodesthings/is
 
 ## Usage
 
-### Namespace
+### Node / CDN
+
 ```js
+// Node
 import * as is from '@chriscodesthings/is';
 
-if (is.isStr("hello world!")) {
-    console.log("This is a string.");
-}
-```
+// ... or ... //
 
-### Named Imports
-```js
-import { isNum, isStr, ... } from '@chriscodesthings/is';
+// jsDelivr
+import * as is from 'https://cdn.jsdelivr.net/npm/@chriscodesthings/is';
 
-if (isStr("hello world!")) {
-    console.log("This is a string.");
-}
-```
+// ... or ... //
 
-### Vanilla (Browser)
-You can use the library directly in the browser. Since the package is published as an ES module, use `type="module"` in your script tag.
+// Unpkg
+import * as is from 'https://unpkg.com/@chriscodesthings/is';
 
-#### jsDelivr
-```html
-<script type="module">
-    import { isNum } from 'https://cdn.jsdelivr.net/npm/@chriscodesthings/is@0.1.0/dist/index.js';
 
-    if (isNum(42)) {
-        console.log("Verified via jsDelivr");
-    }
-</script>
-```
-
-#### unpkg
-```html
-<script type="module">
-    import * as is from 'https://unpkg.com/@chriscodesthings/is@0.1.0/dist/index.js';
-
-    if (is.isStr("hello")) {
-        console.log("Verified via unpkg");
-    }
-</script>
+is.isStr("hello world!"); // true
 ```
 
 ---
@@ -82,7 +59,7 @@ You can use the library directly in the browser. Since the package is published 
 | Function | Description |
 | :--- | :--- |
 | [`is.isStr(x)`](#isisstr) | Checks if a value is a string. |
-| [`is.isBalancedChr(str,c1,c2)`](#isisbalancedchr) | Checks if a value is an integer. |
+| [`is.isBalancedChr(str,c1,c2)`](#isisbalancedchr) | Checks if a string is balanced, e.g. ( and ) are properly matched. Single character version. |
 
 ### Arrays
 
@@ -149,8 +126,7 @@ Checks if a string has balanced characters (e.g., brackets). This function uses 
 
 ```js
 isBalancedChr("(a + b)", "(", ")");        // true
-isBalancedChr("((a) + b)", "(", ")");      // true
-isBalancedChr("a) + b(", "(", ")");        // false (count goes negative)
+isBalancedChr(")a + b)", "(", ")");        // false (close bracket first)
 isBalancedChr("((a + b)", "(", ")");       // false (unclosed bracket)
 isBalancedChr("<div></div>", "<", ">");    // true
 ```
@@ -174,8 +150,8 @@ is.isArr({});        // false
 
 ## See Also...
 
-- [**parse-number**: A numeric sanitizer that fixes Number() edge cases, and allows for percentage](https://github.com/ChrisCodesThings/color-utils "A numeric sanitizer that fixes Number() edge cases, and allows for percentage")
-- [**color-utils**: A collection of lightweight utilities for color identification, conversion, and simple manipulation](https://github.com/ChrisCodesThings/color-utils "A collection of lightweight utilities for color identification, conversion, and simple manipulation")
+- [**parse-number** &mdash; A numeric sanitizer that fixes Number() edge cases, and allows for percentage](https://github.com/ChrisCodesThings/color-utils "A numeric sanitizer that fixes Number() edge cases, and allows for percentage")
+- [**color-utils** &mdash; A collection of lightweight utilities for color identification, conversion, and simple manipulation](https://github.com/ChrisCodesThings/color-utils "A collection of lightweight utilities for color identification, conversion, and simple manipulation")
 
 ## License
 
