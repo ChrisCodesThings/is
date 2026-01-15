@@ -13,6 +13,31 @@ export const isStr = (x: any): x is string => {
     return typeof x === 'string' || x instanceof String;
 };
 
+export interface WordOptions {
+    hyphen?: boolean;
+    underscore?: boolean;
+    numbers?: boolean;
+}
+
+/**
+ * Checks if a string is a "word" consisting of allowed characters.
+ * By default, only letters (a-z, A-Z) are allowed.
+ * @param str The string to check.
+ * @param options Configuration options for allowed characters.
+ * @param options.hyphen Whether to allow hyphens.
+ * @param options.underscore Whether to allow underscores.
+ * @param options.numbers Whether to allow numbers.
+ * @returns True if the string contains only allowed characters.
+ */
+export const isWord = (str: string, options: WordOptions = {}): boolean => {
+    // Generate character set based on options
+    let charSet = "a-zA-Z";
+    if (options.hyphen) charSet += "\\-";
+    if (options.underscore) charSet += "_";
+    if (options.numbers) charSet += "0-9";
+
+    return (new RegExp(`^[${charSet}]+$`)).test(str);
+};
 
 /**
  * Checks if a string has balanced characters (e.g. brackets).

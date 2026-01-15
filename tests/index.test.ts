@@ -131,5 +131,24 @@ describe('is', () => {
                 expect(isBalancedChr('[array]', '[', ']')).toBe(true);
             });
         });
+
+        describe('isWord', () => {
+            it('should return true for valid words', () => {
+                expect(is.isWord('hello')).toBe(true);
+                expect(is.isWord('HELLO')).toBe(true);
+            });
+
+            it('should return false for invalid words', () => {
+                expect(is.isWord('hello world')).toBe(false);
+                expect(is.isWord('123')).toBe(false);
+                expect(is.isWord('')).toBe(false);
+            });
+
+            it('should support options', () => {
+                expect(is.isWord('hello-world', { hyphen: true })).toBe(true);
+                expect(is.isWord('hello_world', { underscore: true })).toBe(true);
+                expect(is.isWord('h3llo', { numbers: true })).toBe(true);
+            });
+        });
     });
 });

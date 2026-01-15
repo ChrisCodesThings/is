@@ -10,6 +10,7 @@
         "integer",
         "percentage",
         "string",
+        "word",
         "balanced",
         "array"
     ],

@@ -59,6 +59,7 @@ is.isStr("hello world!"); // true
 | Function | Description |
 | :--- | :--- |
 | [`is.isStr(x)`](#isisstr) | Checks if a value is a string. |
+| [`is.isWord(str, [options])`](#isisword) | Checks if a string is a "word" consisting of allowed characters. |
 | [`is.isBalancedChr(str,c1,c2)`](#isisbalancedchr) | Checks if a string is balanced, e.g. ( and ) are properly matched. Single character version. |
 
 ### Arrays
@@ -116,6 +117,21 @@ Checks if a variable is a string or a String object.
 is.isStr('hello'); // true
 is.isStr(123);     // false
 ```
+
+[Back to Reference](#reference)
+
+---
+
+#### `is.isWord`
+Checks if a string consists only of alphabetical characters by default. Use options to permit hyphens, underscores, or numbers.
+
+```js
+is.isWord('hello');               // true
+is.isWord('hello-world');         // false
+is.isWord('hello-world', { hyphen: true }); // true
+is.isWord('user_123', { underscore: true, numbers: true }); // true
+```
+
 [Back to Reference](#reference)
 
 ---
